@@ -85,7 +85,20 @@ export default function ItemDetailModal({ item, onClose }: ItemDetailModalProps)
                   {item.stats.speed != null && (
                     <div className="flex items-center gap-1">
                       <span>⚡</span>
-                      <span>Vitesse : <strong>{item.stats.speed}</strong></span>
+                      <span>Vitesse : <strong>{item.stats.speed}</strong>
+                        <span className="text-xs ml-1 text-gray-400">
+                          ({item.stats.speed <= 8 ? 'Très rapide' :
+                            item.stats.speed <= 15 ? 'Rapide' :
+                            item.stats.speed <= 22 ? 'Moyenne' :
+                            item.stats.speed <= 28 ? 'Lente' : 'Très lente'})
+                        </span>
+                      </span>
+                    </div>
+                  )}
+                  {item.stats.damage != null && item.stats.speed != null && (
+                    <div className="flex items-center gap-1">
+                      <span>📈</span>
+                      <span>DPS : <strong>{Math.round(item.stats.damage * 60 / item.stats.speed)}</strong></span>
                     </div>
                   )}
                   {item.stats.tooltip && (
