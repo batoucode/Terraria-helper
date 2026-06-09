@@ -2,6 +2,7 @@
 import Image from 'next/image';
 import { CraftingItem } from '@/lib/types';
 import { useFavorites } from '@/contexts/FavoritesContext';
+import { getTierStyle } from '@/components/TierFilter';
 
 interface ItemCardProps {
   item: CraftingItem;
@@ -43,7 +44,9 @@ export default function ItemCard({ item, onClick }: ItemCardProps) {
           <h3 className="font-bold text-white truncate">{item.name}</h3>
           <p className="text-xs text-gray-400">{item.category}</p>
           {item.tier && (
-            <span className="text-xs bg-gray-700 px-2 py-0.5 rounded mt-1 inline-block text-gray-300">
+            <span className={`text-xs px-2 py-0.5 rounded mt-1 inline-block ${
+              getTierStyle(item.tier) ? getTierStyle(item.tier)?.bg + ' ' + getTierStyle(item.tier)?.text : 'bg-gray-700 text-gray-300'
+            }`}>
               📈 {item.tier}
             </span>
           )}

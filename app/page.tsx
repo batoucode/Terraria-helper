@@ -4,6 +4,7 @@ import { itemsData } from '@/lib/data';
 import { ItemCategory } from '@/lib/types';
 import SearchBar from '@/components/SearchBar';
 import CategoryFilter from '@/components/CategoryFilter';
+import TierFilter from '@/components/TierFilter';
 import ItemCard from '@/components/ItemCard';
 import ItemDetailModal from '@/components/ItemDetailModal';
 import Link from 'next/link';
@@ -11,15 +12,30 @@ import Link from 'next/link';
 export default function Home() {
   const [search, setSearch] = useState('');
   const [activeCategory, setActiveCategory] = useState<ItemCategory | null>(null);
+  const [activeTier, setActiveTier] = useState<string | null>(null);
   const [selectedItemId, setSelectedItemId] = useState<string | null>(null);
+
+  // Tier group mapping (same as TierFilter)
+  const TIER_TO_GROUP: Record<string, string> = {
+    'Début': 'Débutant', 'Bois': 'Débutant', 'Cactus': 'Débutant', 'Minage': 'Débutant', 'Achat': 'Débutant',
+    'Cuivre': 'Métaux de base', 'Étain': 'Métaux de base', 'Fer': 'Métaux de base', 'Plomb': 'Métaux de base',
+    'Argent': 'Métaux de base', 'Tungstène': 'Métaux de base', 'Or': 'Métaux de base', 'Platine': 'Métaux de base',
+    'Corruption': 'Pré-Hardmode', 'Crimson': 'Pré-Hardmode', 'Météore': 'Pré-Hardmode',
+    'Jungle': 'Pré-Hardmode', 'Donjon': 'Pré-Hardmode', 'Enfer': 'Pré-Hardmode', 'Spécial': 'Pré-Hardmode',
+    'Avancé': 'Pré-Hardmode', 'Désert': 'Pré-Hardmode', 'Ombre': 'Pré-Hardmode',
+    'Hardmode': 'Hardmode',
+    'Fin': 'Fin de jeu',
+    'Butin': 'Butin',
+  };
 
   const filteredItems = useMemo(() => {
     return itemsData.filter((item) => {
       const matchSearch = item.name.toLowerCase().includes(search.toLowerCase());
       const matchCategory = activeCategory ? item.category === activeCategory : true;
-      return matchSearch && matchCategory;
+      const matchTier = activeTier ? TIER_TO_GROUP[item.tier || ''] === activeTier : true;
+      return matchSearch && matchCategory && matchTier;
     });
-  }, [search, activeCategory]);
+  }, [search, activeCategory, activeTier]);
 
   const selectedItem = selectedItemId
     ? itemsData.find((i) => i.id === selectedItemId)
@@ -32,7 +48,7 @@ export default function Home() {
           ⚒ Terraria Craft Helper
         </h1>
         <p className="text-center text-gray-400 mb-6">
-          Recettes, objets et paliers
+          {itemsData.length} objets — Recettes, stats et paliers
         </p>
 
         <Link
@@ -44,8 +60,21 @@ export default function Home() {
 
         <SearchBar onSearch={setSearch} />
         <CategoryFilter active={activeCategory} onSelect={setActiveCategory} />
+        <TierFilter activeTier={activeTier} onSelect={setActiveTier} />
 
-        <div className="mt-6 space-y-3">
+        <div className="mt-4 mb-2 text-xs text-gray-500">
+          {filteredItems.length} objet{filteredItems.length > 1 ? 's' : ''} trouvé{filteredItems.length > 1 ? 's' : ''}
+          {(activeCategory || activeTier) && (
+            <button
+              onClick={() => { setActiveCategory(null); setActiveTier(null); }}
+              className="ml-2 text-orange-400 hover:text-orange-300 underline"
+            >
+              Réinitialiser les filtres
+            </button>
+          )}
+        </div>
+
+        <div className="mt-2 space-y-3">
           {filteredItems.length === 0 ? (
             <p className="text-center text-gray-500 py-10">
               Aucun objet trouvé.
