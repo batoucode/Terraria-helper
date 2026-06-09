@@ -1,7 +1,7 @@
 'use client';
 import { ItemCategory } from '@/lib/types';
 
-const categories: ItemCategory[] = ['Armure', 'Arme', 'Outil', 'Station de craft', 'Ressource', 'Accessoire', 'Potion'];
+const categories: ItemCategory[] = ['Armure', 'Arme', 'Outil', 'Station de craft', 'Ressource', 'Accessoire', 'Potion', 'Munition'];
 
 interface CategoryFilterProps {
   active: string | null;
@@ -16,6 +16,7 @@ const categoryColorMap: Record<ItemCategory, string> = {
   Ressource: 'bg-amber-600',
   Accessoire: 'bg-pink-600',
   Potion: 'bg-cyan-600',
+  Munition: 'bg-orange-600',
 };
 
 export default function CategoryFilter({ active, onSelect }: CategoryFilterProps) {

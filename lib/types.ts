@@ -1,4 +1,4 @@
-export type ItemCategory = 'Armure' | 'Arme' | 'Outil' | 'Station de craft' | 'Ressource' | 'Accessoire' | 'Potion';
+export type ItemCategory = 'Armure' | 'Arme' | 'Outil' | 'Station de craft' | 'Ressource' | 'Accessoire' | 'Potion' | 'Munition';
 
 export interface Ingredient {
   name: string;
