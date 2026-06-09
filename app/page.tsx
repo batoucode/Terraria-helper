@@ -6,6 +6,7 @@ import SearchBar from '@/components/SearchBar';
 import CategoryFilter from '@/components/CategoryFilter';
 import ItemCard from '@/components/ItemCard';
 import ItemDetailModal from '@/components/ItemDetailModal';
+import Link from 'next/link';
 
 export default function Home() {
   const [search, setSearch] = useState('');
@@ -33,6 +34,13 @@ export default function Home() {
         <p className="text-center text-gray-400 mb-6">
           Recettes, objets et paliers
         </p>
+
+        <Link
+          href="/comparateur"
+          className="block w-full mb-4 p-3 bg-gradient-to-r from-gray-800 to-gray-750 border border-orange-700/50 rounded-xl text-center text-orange-400 hover:bg-orange-900/20 transition font-medium"
+        >
+          ⚔️ Comparateur d'armes → DPS, vitesse, dégâts
+        </Link>
 
         <SearchBar onSearch={setSearch} />
         <CategoryFilter active={activeCategory} onSelect={setActiveCategory} />
