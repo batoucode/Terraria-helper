@@ -16,6 +16,7 @@ export interface CraftingItem {
     pickaxePower?: number;
     speed?: number;
     tooltip?: string;
+    setBonus?: string;
   };
   ingredients?: Ingredient[];
   tier?: string;
