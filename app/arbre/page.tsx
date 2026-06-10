@@ -36,13 +36,15 @@ function getUsedIn(itemName: string): CraftingItem[] {
   return itemsData.filter(i => i.ingredients?.some(ing => ing.name === itemName));
 }
 
-function CraftTreeNode({ item, depth = 0, onSelect }: {
+function CraftTreeNode({ item, depth = 0, onSelect, visited }: {
   item: CraftingItem;
   depth: number;
   onSelect: (id: string) => void;
+  visited?: Set<string>;
 }) {
   const [expanded, setExpanded] = useState(depth < 1);
   const hasIngredients = item.ingredients && item.ingredients.length > 0;
+  const branchVisited = visited || new Set<string>();
 
   return (
     <div className="relative">
@@ -96,18 +98,26 @@ function CraftTreeNode({ item, depth = 0, onSelect }: {
         )}
       </div>
 
-      {/* Ingredients sub-tree (flat, non-recursive) */}
+      {/* Ingredients sub-tree (recursive with cycle protection) */}
       {expanded && hasIngredients && (
         <div className="border-l-2 border-dashed border-brown-lt ml-6 pl-2 my-1">
           {item.ingredients!.map((ing, idx) => {
             const ingItem = itemsByName.get(ing.name);
+            const isCycle = ingItem && branchVisited.has(ing.name);
+            const nextVisited = new Set(branchVisited);
+            nextVisited.add(item.name);
+
             return (
-              <div key={idx} className="flex items-center gap-2 py-1 group">
+              <div key={idx} className="flex items-center gap-2">
                 <span className="text-[10px] text-brown-lt font-patrick w-5 text-right flex-shrink-0">×{ing.quantity}</span>
-                {ingItem ? (
+                {ingItem && !isCycle ? (
+                  <div className="flex-1">
+                    <CraftTreeNode item={ingItem} depth={0} onSelect={onSelect} visited={nextVisited} />
+                  </div>
+                ) : ingItem && isCycle ? (
                   <div
-                    className="flex items-center gap-1.5 flex-1 cursor-pointer hover:text-green-dk hover:underline transition"
-                    onClick={(e) => { e.stopPropagation(); onSelect(ingItem.id); }}
+                    className="flex-1 flex items-center gap-1.5 py-1 px-2 rounded cursor-pointer hover:bg-parchment/50 transition group"
+                    onClick={() => onSelect(ingItem.id)}
                   >
                     <div className="relative w-6 h-6 flex-shrink-0 bg-cream border border-brown-lt rounded overflow-hidden">
                       <Image src={ingItem.imageUrl} alt={ing.name} fill className="object-contain p-0.5" unoptimized
@@ -115,12 +125,10 @@ function CraftTreeNode({ item, depth = 0, onSelect }: {
                       />
                     </div>
                     <span className="font-caveat text-xs text-craft-ink truncate">{ing.name}</span>
-                    <span className="text-[9px] font-patrick flex-shrink-0 ml-auto opacity-0 group-hover:opacity-100 transition" style={{ color: CATEGORY_COLORS[ingItem.category] || '#999' }}>
-                      {ingItem.category}
-                    </span>
+                    <span className="text-[9px] text-amber-600 font-patrick">↺ déjà vu</span>
                   </div>
                 ) : (
-                  <span className="font-caveat text-xs text-brown-md italic">{ing.name}</span>
+                  <span className="font-caveat text-xs text-brown-md italic flex-1">{ing.name}</span>
                 )}
               </div>
             );
