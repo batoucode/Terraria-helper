@@ -15,7 +15,6 @@ export default function Home() {
   const [activeTier, setActiveTier] = useState<string | null>(null);
   const [selectedItemId, setSelectedItemId] = useState<string | null>(null);
 
-  // Tier group mapping (same as TierFilter)
   const TIER_TO_GROUP: Record<string, string> = {
     'Début': 'Débutant', 'Bois': 'Débutant', 'Cactus': 'Débutant', 'Minage': 'Débutant', 'Achat': 'Débutant',
     'Cuivre': 'Métaux de base', 'Étain': 'Métaux de base', 'Fer': 'Métaux de base', 'Plomb': 'Métaux de base',
@@ -42,41 +41,57 @@ export default function Home() {
     : null;
 
   return (
-    <main className="min-h-screen bg-gray-900 pb-16">
-      <div className="max-w-3xl mx-auto px-4 py-6">
-        <h1 className="text-3xl font-bold text-center mb-2 bg-gradient-to-r from-amber-400 to-red-500 bg-clip-text text-transparent">
-          ⚒ Terraria Craft Helper
-        </h1>
-        <p className="text-center text-gray-400 mb-6">
-          {itemsData.length} objets — Recettes, stats et paliers
-        </p>
+    <main className="min-h-screen pb-16">
+      {/* Sticky parchment header */}
+      <div className="sticky top-0 z-20 border-b-2 border-brown-lt shadow-craft" style={{ background: '#E8D8B4' }}>
+        <div className="max-w-3xl mx-auto px-4 py-3">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="font-patrick text-[11px] text-brown-lt uppercase tracking-widest">guide de craft</p>
+              <h1 className="font-kalam font-bold text-2xl text-brown-dk leading-tight">⚒ Terraria Craft</h1>
+            </div>
+            <div className="flex items-center gap-2">
+              <span
+                className="font-patrick text-[11px] px-2.5 py-1 rounded-craft-pill border"
+                style={{ background: 'rgba(45,90,61,0.12)', borderColor: '#2D5A3D', color: '#2D5A3D' }}
+              >
+                {itemsData.length} objets
+              </span>
+              <Link
+                href="/comparateur"
+                className="font-caveat text-sm px-3 py-1.5 rounded-craft-sm border-2 border-craft-red text-craft-red hover:bg-craft-red hover:text-paper transition"
+                style={{ background: 'rgba(139,58,58,0.07)' }}
+              >
+                ⚔ Comparer
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
 
-        <Link
-          href="/comparateur"
-          className="block w-full mb-4 p-3 bg-gradient-to-r from-gray-800 to-gray-750 border border-orange-700/50 rounded-xl text-center text-orange-400 hover:bg-orange-900/20 transition font-medium"
-        >
-          ⚔️ Comparateur d'armes → DPS, vitesse, dégâts
-        </Link>
-
+      <div className="max-w-3xl mx-auto px-4 py-4">
         <SearchBar onSearch={setSearch} />
         <CategoryFilter active={activeCategory} onSelect={setActiveCategory} />
         <TierFilter activeTier={activeTier} onSelect={setActiveTier} />
 
-        <div className="mt-4 mb-2 text-xs text-gray-500">
-          {filteredItems.length} objet{filteredItems.length > 1 ? 's' : ''} trouvé{filteredItems.length > 1 ? 's' : ''}
+        <div className="mt-3 mb-2 flex items-center gap-2 text-xs font-caveat text-brown-md">
+          <span>
+            <strong className="font-kalam text-green-dk">{filteredItems.length}</strong>
+            {' '}objet{filteredItems.length > 1 ? 's' : ''} trouvé{filteredItems.length > 1 ? 's' : ''}
+          </span>
           {(activeCategory || activeTier) && (
             <button
               onClick={() => { setActiveCategory(null); setActiveTier(null); }}
-              className="ml-2 text-orange-400 hover:text-orange-300 underline"
+              className="px-2.5 py-0.5 rounded-craft-pill border border-brown-lt text-brown-md hover:bg-parchment transition font-caveat"
             >
-              Réinitialiser les filtres
+              ✕ Réinitialiser
             </button>
           )}
         </div>
 
         <div className="mt-2 space-y-3">
           {filteredItems.length === 0 ? (
-            <p className="text-center text-gray-500 py-10">
+            <p className="text-center font-caveat text-brown-lt py-10">
               Aucun objet trouvé.
             </p>
           ) : (

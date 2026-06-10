@@ -18,12 +18,12 @@ export default function SearchBar({ onSearch }: SearchBarProps) {
     <div className="relative w-full">
       <input
         type="text"
-        placeholder="🔍 Rechercher un objet..."
+        placeholder="Rechercher un objet..."
         value={value}
         onChange={handleChange}
-        className="w-full p-3 pl-10 rounded-xl bg-gray-800 border border-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+        className="w-full p-3 pl-10 rounded-craft-input bg-paper border-2 border-brown-md text-craft-ink placeholder-brown-lt font-caveat text-[18px] shadow-craft focus:outline-none focus:border-green-dk transition"
       />
-      <span className="absolute left-3 top-3 text-gray-400 text-lg">🔍</span>
+      <span className="absolute left-3 top-3 text-brown-lt text-lg">🔍</span>
     </div>
   );
 }

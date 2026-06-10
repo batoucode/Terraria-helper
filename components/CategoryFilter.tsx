@@ -8,26 +8,26 @@ interface CategoryFilterProps {
   onSelect: (cat: ItemCategory | null) => void;
 }
 
-const categoryColorMap: Record<ItemCategory, string> = {
-  Armure: 'bg-blue-600',
-  Arme: 'bg-red-600',
-  Outil: 'bg-emerald-600',
-  'Station de craft': 'bg-violet-600',
-  Ressource: 'bg-amber-600',
-  Accessoire: 'bg-pink-600',
-  Potion: 'bg-cyan-600',
-  Munition: 'bg-orange-600',
+const categoryDot: Record<ItemCategory, string> = {
+  Armure: '#3b82f6',
+  Arme: '#ef4444',
+  Outil: '#10b981',
+  'Station de craft': '#8b5cf6',
+  Ressource: '#d97706',
+  Accessoire: '#ec4899',
+  Potion: '#06b6d4',
+  Munition: '#f97316',
 };
 
 export default function CategoryFilter({ active, onSelect }: CategoryFilterProps) {
   return (
-    <div className="flex flex-wrap gap-2 my-4">
+    <div className="flex gap-2 my-4 overflow-x-auto scrollbar-none pb-1">
       <button
         onClick={() => onSelect(null)}
-        className={`px-4 py-2 rounded-full text-sm font-medium transition ${
+        className={`flex-shrink-0 px-4 py-1.5 rounded-craft-sm text-sm font-caveat font-semibold border-2 transition ${
           active === null
-            ? 'bg-blue-600 text-white ring-2 ring-blue-400'
-            : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+            ? 'bg-green-dk text-paper border-green-dk shadow-craft'
+            : 'bg-paper text-brown-md border-brown-lt hover:border-brown-md'
         }`}
       >
         Tous
@@ -36,12 +36,16 @@ export default function CategoryFilter({ active, onSelect }: CategoryFilterProps
         <button
           key={cat}
           onClick={() => onSelect(active === cat ? null : cat)}
-          className={`px-4 py-2 rounded-full text-sm font-medium transition ${
+          className={`flex-shrink-0 flex items-center gap-1.5 px-4 py-1.5 rounded-craft-sm text-sm font-caveat font-semibold border-2 transition ${
             active === cat
-              ? `${categoryColorMap[cat]} text-white ring-2 ring-white/30`
-              : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+              ? 'bg-green-dk text-paper border-green-dk shadow-craft'
+              : 'bg-paper text-brown-md border-brown-lt hover:border-brown-md'
           }`}
         >
+          <span
+            className="w-2 h-2 rounded-full flex-shrink-0"
+            style={{ backgroundColor: categoryDot[cat] }}
+          />
           {cat}
         </button>
       ))}
