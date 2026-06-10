@@ -3,913 +3,660 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mockup — Style Manga Craft</title>
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Kalam:wght@300;400;700&family=Patrick+Hand&display=swap" rel="stylesheet">
-
+<title>Mockup Mobile — Manga Craft</title>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Kalam:wght@400;700&family=Patrick+Hand&display=swap" rel="stylesheet">
 <style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
 :root {
   --cream:       #F5EDD8;
-  --parchment:   #E8D9B8;
-  --paper:       #FDFAF0;
+  --parchment:   #E8D8B4;
+  --paper:       #FFFEF8;
   --brown-dark:  #3D2B1F;
   --brown-med:   #7B4F2E;
   --brown-light: #C4956A;
-  --green-dark:  #2D4A2F;
+  --green-dark:  #2D5A3D;
   --green-med:   #4A7A50;
   --green-light: #8AB595;
+  --red:         #8B3A3A;
   --ink:         #2A1A12;
-  --red-accent:  #8B3A3A;
-  --line-color:  rgba(90, 60, 30, 0.12);
+  --line:        rgba(90,60,30,0.08);
 }
-
-/* SVG filters for rough/hand-drawn edges */
-.filters { position: absolute; width: 0; height: 0; overflow: hidden; }
-
-* { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  font-family: 'Caveat', cursive;
-  background-color: var(--cream);
-  color: var(--ink);
+  background: #B8A888;
   min-height: 100vh;
-  /* notebook lines */
-  background-image:
-    repeating-linear-gradient(
-      transparent, transparent 29px,
-      var(--line-color) 29px, var(--line-color) 30px
-    );
-  background-attachment: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 16px 60px;
+  font-family: 'Caveat', cursive;
+  gap: 32px;
 }
+
+.page-title {
+  font-family: 'Kalam', cursive;
+  font-size: 18px;
+  color: #3D2B1F;
+  text-align: center;
+  letter-spacing: 1px;
+  opacity: 0.8;
+}
+.page-title span {
+  font-family: 'Patrick Hand', cursive;
+  font-size: 12px;
+  display: block;
+  margin-top: 3px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+/* ── PHONE FRAME ── */
+.phone {
+  width: 390px;
+  background: var(--cream);
+  border-radius: 44px;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 10px #1C1C1E,
+    0 0 0 13px #3A3A3C,
+    0 40px 80px rgba(0,0,0,0.5);
+  position: relative;
+  background-image: repeating-linear-gradient(
+    transparent, transparent 27px,
+    var(--line) 27px, var(--line) 28px
+  );
+}
+.phone-notch {
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 120px; height: 34px;
+  background: #1C1C1E;
+  border-radius: 0 0 22px 22px;
+  z-index: 100;
+}
+.phone-screen {
+  height: 844px;
+  overflow-y: auto;
+  padding-top: 44px;
+}
+.phone-screen::-webkit-scrollbar { display: none; }
 
 /* ── HEADER ── */
 .header {
+  position: sticky; top: 0; z-index: 50;
   background: var(--parchment);
-  border-bottom: 2.5px solid var(--brown-med);
-  padding: 18px 24px 12px;
-  position: relative;
-  /* manga speed lines in top corners */
-  overflow: hidden;
+  border-bottom: 2px solid var(--brown-med);
+  padding: 10px 20px 12px;
 }
-.header::before {
-  content: '';
-  position: absolute; top: 0; right: 0;
-  width: 200px; height: 200px;
-  background: repeating-conic-gradient(
-    from 200deg at 100% 0%,
-    transparent 0deg,
-    transparent 3.5deg,
-    rgba(90,60,30,0.06) 3.5deg,
-    rgba(90,60,30,0.06) 5deg
-  );
-  pointer-events: none;
-}
-.header-inner {
-  max-width: 960px; margin: 0 auto;
-  display: flex; align-items: center; justify-content: space-between;
-}
-.logo {
-  display: flex; flex-direction: column; line-height: 1;
+.header-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
 }
 .logo-sub {
   font-family: 'Patrick Hand', cursive;
-  font-size: 12px; color: var(--brown-med);
-  letter-spacing: 2px; text-transform: uppercase;
-  margin-bottom: 2px;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--brown-light);
+  margin-bottom: 1px;
 }
 .logo-main {
   font-family: 'Kalam', cursive;
-  font-size: 34px; font-weight: 700;
+  font-size: 26px;
+  font-weight: 700;
   color: var(--brown-dark);
-  text-shadow: 3px 3px 0 rgba(90,60,30,0.18);
-  letter-spacing: -1px;
-  /* slight hand-drawn wobble via transform */
-  display: inline-block;
+  line-height: 1;
 }
-.logo-main span { color: var(--green-dark); }
-.logo-badge {
-  display: inline-block;
+.logo-main em { font-style: normal; color: var(--green-dark); }
+.header-badge {
+  font-family: 'Patrick Hand', cursive;
+  font-size: 11px;
   background: var(--green-dark);
   color: #fff;
-  font-size: 10px;
-  font-family: 'Patrick Hand', cursive;
-  padding: 2px 8px;
-  border-radius: 2px 8px 3px 7px / 5px 2px 6px 3px;
-  transform: rotate(-1.5deg);
-  margin-top: 4px;
-  letter-spacing: 1px;
-  width: fit-content;
+  padding: 4px 12px;
+  border-radius: 3px 8px 3px 8px;
+  letter-spacing: 0.5px;
+  margin-bottom: 3px;
 }
 
-.nav-link {
-  font-family: 'Kalam', cursive;
-  font-size: 15px; font-weight: 700;
-  color: var(--brown-dark);
-  text-decoration: none;
-  border-bottom: 2px dashed var(--brown-med);
-  padding-bottom: 1px;
-  transition: color 0.2s;
+/* ── SEARCH ── */
+.section { padding: 16px 16px 0; }
+.search-box {
+  background: var(--paper);
+  border: 2px solid var(--brown-med);
+  border-radius: 4px 14px 4px 14px;
+  box-shadow: 3px 4px 0 var(--brown-light);
+  padding: 11px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
-.nav-link:hover { color: var(--green-dark); }
-
-/* ── SEARCH AREA ── */
-.search-area {
-  max-width: 960px; margin: 28px auto 0;
-  padding: 0 16px;
-}
-.search-label {
-  font-family: 'Kalam', cursive;
-  font-size: 13px; color: var(--brown-med);
-  margin-bottom: 6px;
-  display: flex; align-items: center; gap: 6px;
-}
-.search-label::before {
-  content: '→';
-  font-size: 16px; color: var(--green-dark);
-}
-.search-wrap {
-  position: relative;
-}
-.search-input {
-  width: 100%;
-  padding: 12px 48px 12px 16px;
+.search-icon { font-size: 17px; opacity: 0.45; }
+.search-placeholder {
   font-family: 'Caveat', cursive;
   font-size: 18px;
-  color: var(--ink);
-  background: var(--paper);
-  border: none;
-  border-radius: 3px 9px 4px 8px / 7px 3px 8px 4px;
-  outline: none;
-  box-shadow:
-    0 0 0 2.5px var(--brown-med),
-    3px 4px 0 var(--brown-light),
-    inset 0 1px 3px rgba(0,0,0,0.06);
-  transition: box-shadow 0.2s;
-}
-.search-input::placeholder { color: var(--brown-light); }
-.search-input:focus {
-  box-shadow:
-    0 0 0 2.5px var(--green-dark),
-    3px 4px 0 var(--green-med),
-    inset 0 1px 3px rgba(0,0,0,0.06);
-}
-.search-icon {
-  position: absolute; right: 14px; top: 50%;
-  transform: translateY(-50%);
-  font-size: 20px; opacity: 0.5;
+  color: var(--brown-light);
 }
 
-/* ── CATEGORY TABS ── */
-.tabs-section {
-  max-width: 960px; margin: 24px auto 0;
-  padding: 0 16px;
-}
-.tabs-label {
-  font-family: 'Patrick Hand', cursive;
-  font-size: 11px; color: var(--brown-light);
-  text-transform: uppercase; letter-spacing: 2px;
-  margin-bottom: 10px;
-}
+/* ── TABS ── */
+.tabs-wrap { padding: 14px 16px 0; }
 .tabs-row {
-  display: flex; flex-wrap: wrap; gap: 8px;
+  display: flex;
+  gap: 7px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding-bottom: 2px;
 }
+.tabs-row::-webkit-scrollbar { display: none; }
 .tab {
   font-family: 'Kalam', cursive;
-  font-size: 14px; font-weight: 700;
-  padding: 6px 16px;
-  cursor: pointer;
-  transition: all 0.15s;
-  position: relative;
-  border: none; background: var(--paper);
-  border-radius: 2px 8px 3px 7px / 5px 2px 6px 3px;
-  box-shadow:
-    0 0 0 2px var(--brown-med),
-    2px 3px 0 var(--brown-light);
+  font-size: 14px;
+  font-weight: 700;
+  padding: 6px 15px;
+  border-radius: 3px 9px 3px 9px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  border: 2px solid var(--brown-med);
+  background: var(--paper);
   color: var(--ink);
-}
-.tab:hover {
-  transform: translateY(-1px);
-  box-shadow:
-    0 0 0 2px var(--brown-dark),
-    3px 4px 0 var(--brown-med);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
 }
 .tab.active {
   background: var(--green-dark);
+  border-color: var(--green-dark);
   color: #fff;
-  box-shadow:
-    0 0 0 2px var(--green-dark),
-    2px 3px 0 var(--brown-dark);
-  transform: rotate(-0.5deg);
 }
 .tab-dot {
-  display: inline-block;
   width: 7px; height: 7px;
   border-radius: 50%;
-  margin-right: 5px;
-  vertical-align: middle;
-}
-
-/* ── ITEM GRID ── */
-.grid-section {
-  max-width: 960px; margin: 28px auto 40px;
-  padding: 0 16px;
-}
-.grid-meta {
-  font-family: 'Patrick Hand', cursive;
-  font-size: 12px; color: var(--brown-med);
-  margin-bottom: 14px;
-}
-.grid-meta span { font-weight: bold; color: var(--green-dark); }
-.items-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-  gap: 16px;
-}
-
-/* ── ITEM CARD ── */
-.item-card {
-  background: var(--paper);
-  padding: 12px;
-  cursor: pointer;
-  position: relative;
-  transition: transform 0.15s;
-  /* hand-drawn border via asymmetric border-radius + multiple box-shadows */
-  border-radius: 3px 10px 4px 9px / 8px 3px 9px 4px;
-  box-shadow:
-    0 0 0 2px var(--brown-med),
-    3px 4px 0 var(--brown-light),
-    inset 0 0 0 1px rgba(255,255,255,0.6);
-  /* subtle paper lines inside */
-  background-image:
-    repeating-linear-gradient(
-      transparent, transparent 19px,
-      rgba(90,60,30,0.07) 19px, rgba(90,60,30,0.07) 20px
-    );
-}
-.item-card:hover {
-  transform: translateY(-3px) rotate(0.5deg);
-  box-shadow:
-    0 0 0 2px var(--brown-dark),
-    5px 6px 0 var(--brown-med);
-}
-.item-card:nth-child(2n) { transform: rotate(-0.4deg); }
-.item-card:nth-child(2n):hover { transform: translateY(-3px) rotate(-0.4deg); }
-.item-card:nth-child(3n) { transform: rotate(0.3deg); }
-.item-card:nth-child(3n):hover { transform: translateY(-3px) rotate(0.3deg); }
-
-.card-img-wrap {
-  display: flex; justify-content: center; align-items: center;
-  height: 64px; margin-bottom: 8px;
-  background: rgba(255,255,255,0.5);
-  border-radius: 2px 6px 3px 5px / 4px 2px 5px 3px;
-  border: 1.5px dashed var(--brown-light);
-  overflow: hidden;
-  position: relative;
-}
-.card-img-wrap::after {
-  content: '';
-  position: absolute; inset: 0;
-  background:
-    radial-gradient(circle at 20% 20%, rgba(255,255,255,0.4) 0%, transparent 50%);
-  pointer-events: none;
-}
-.card-img { max-width: 48px; max-height: 48px; image-rendering: pixelated; }
-.card-emoji { font-size: 36px; line-height: 1; }
-
-.card-name {
-  font-family: 'Kalam', cursive;
-  font-size: 15px; font-weight: 700;
-  color: var(--ink);
-  text-align: center;
-  line-height: 1.2;
-  margin-bottom: 6px;
-}
-.card-badges {
-  display: flex; gap: 4px; flex-wrap: wrap; justify-content: center;
-}
-.badge {
-  font-family: 'Patrick Hand', cursive;
-  font-size: 10px;
-  padding: 2px 7px;
-  border-radius: 1px 5px 2px 4px / 3px 1px 4px 2px;
-  letter-spacing: 0.5px;
-  font-weight: bold;
-  display: inline-block;
-  transform: rotate(-0.5deg);
-}
-.badge-armor   { background: rgba(74,122,80,0.15); color: var(--green-dark);  border: 1.5px solid var(--green-med); }
-.badge-weapon  { background: rgba(139,58,58,0.12); color: var(--red-accent);  border: 1.5px solid var(--red-accent); }
-.badge-tool    { background: rgba(90,60,30,0.12);  color: var(--brown-dark);  border: 1.5px solid var(--brown-med); }
-.badge-tier    { background: rgba(255,255,255,0.6); color: var(--brown-med);  border: 1.5px dashed var(--brown-light); transform: rotate(0.5deg); }
-.fav-btn {
-  position: absolute; top: 6px; right: 8px;
-  font-size: 14px; cursor: pointer; opacity: 0.6;
-  transition: opacity 0.15s, transform 0.15s;
-}
-.fav-btn:hover { opacity: 1; transform: scale(1.3); }
-
-/* ── MODAL PREVIEW ── */
-.modal-overlay {
-  background: rgba(61, 43, 31, 0.55);
-  padding: 24px 16px;
-  display: flex; align-items: center; justify-content: center;
-  margin-top: 40px;
-}
-.modal-overlay::before {
-  content: "✦  Exemple : fiche détail d'un objet  ✦";
-  display: block;
-  font-family: 'Patrick Hand', cursive;
-  font-size: 11px; letter-spacing: 2px;
-  color: var(--brown-light);
-  text-align: center;
-  margin-bottom: 16px;
-  position: absolute;
-  top: -28px; left: 0; right: 0;
-}
-.modal-label {
-  font-family: 'Patrick Hand', cursive;
-  font-size: 11px; letter-spacing: 2px;
-  color: var(--brown-light);
-  text-align: center;
-  margin-bottom: 16px;
-  text-transform: uppercase;
-}
-.modal {
-  background: var(--paper);
-  width: 100%; max-width: 420px;
-  padding: 24px;
-  border-radius: 4px 14px 5px 12px / 10px 4px 12px 5px;
-  box-shadow:
-    0 0 0 3px var(--brown-dark),
-    6px 8px 0 var(--brown-med),
-    12px 14px 0 rgba(90,60,30,0.15);
-  position: relative;
-  background-image:
-    repeating-linear-gradient(
-      transparent, transparent 27px,
-      rgba(90,60,30,0.08) 27px, rgba(90,60,30,0.08) 28px
-    );
-}
-/* corner fold effect */
-.modal::after {
-  content: '';
-  position: absolute; bottom: 0; right: 0;
-  width: 24px; height: 24px;
-  background: linear-gradient(225deg, var(--parchment) 50%, transparent 50%);
-  border-radius: 0 0 3px 0;
-}
-/* red binding line like notebook */
-.modal::before {
-  content: '';
-  position: absolute; left: 44px; top: 0; bottom: 0;
-  width: 2px;
-  background: rgba(139,58,58,0.3);
-}
-.modal-close {
-  position: absolute; top: 10px; right: 14px;
-  font-family: 'Kalam', cursive;
-  font-size: 18px; cursor: pointer;
-  color: var(--brown-light);
-  line-height: 1;
-}
-.modal-close:hover { color: var(--red-accent); }
-
-.modal-header {
-  display: flex; align-items: center; gap: 16px;
-  padding-left: 20px;
-  margin-bottom: 16px;
-}
-.modal-img-frame {
-  width: 72px; height: 72px; flex-shrink: 0;
-  background: rgba(255,255,255,0.6);
-  border-radius: 3px 10px 4px 9px / 7px 3px 8px 4px;
-  border: 2px solid var(--brown-med);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 40px;
-  box-shadow: 2px 3px 0 var(--brown-light);
-}
-.modal-title-block {}
-.modal-item-name {
-  font-family: 'Kalam', cursive;
-  font-size: 22px; font-weight: 700;
-  color: var(--ink); line-height: 1.1;
-}
-.modal-item-cat {
-  font-family: 'Patrick Hand', cursive;
-  font-size: 12px; color: var(--brown-med);
-  margin-top: 3px;
-}
-.modal-tier-badge {
-  display: inline-block;
-  font-family: 'Patrick Hand', cursive;
-  font-size: 11px;
-  padding: 2px 10px;
-  border-radius: 1px 6px 2px 5px / 4px 1px 5px 2px;
-  background: var(--green-dark);
-  color: #fff;
-  margin-top: 5px;
-  transform: rotate(-1deg);
-  letter-spacing: 1px;
-}
-
-.modal-divider {
-  border: none;
-  border-top: 1.5px dashed var(--brown-light);
-  margin: 14px 0 14px 20px;
-}
-
-.modal-section-title {
-  font-family: 'Kalam', cursive;
-  font-size: 14px; font-weight: 700;
-  color: var(--brown-med);
-  margin-bottom: 10px; margin-left: 20px;
-  display: flex; align-items: center; gap: 6px;
-}
-.modal-section-title::before { content: '✎'; font-size: 16px; }
-
-.stats-grid {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 8px; margin-left: 20px;
-}
-.stat-box {
-  background: rgba(255,255,255,0.6);
-  border-radius: 2px 7px 3px 6px / 5px 2px 6px 3px;
-  border: 1.5px solid var(--brown-light);
-  padding: 6px 10px;
-}
-.stat-label {
-  font-family: 'Patrick Hand', cursive;
-  font-size: 10px; color: var(--brown-med);
-  text-transform: uppercase; letter-spacing: 1px;
-}
-.stat-value {
-  font-family: 'Kalam', cursive;
-  font-size: 20px; font-weight: 700;
-  color: var(--ink);
-  line-height: 1;
-}
-.stat-value.green { color: var(--green-dark); }
-.stat-value.red   { color: var(--red-accent); }
-
-.ingredients-list { margin-left: 20px; }
-.ingredient-row {
-  display: flex; align-items: center; gap: 8px;
-  padding: 5px 0;
-  border-bottom: 1px dashed rgba(90,60,30,0.15);
-  font-family: 'Caveat', cursive;
-  font-size: 16px;
-}
-.ingredient-row:last-child { border-bottom: none; }
-.ingredient-qty {
-  font-family: 'Kalam', cursive;
-  font-weight: 700; font-size: 16px;
-  color: var(--green-dark);
-  min-width: 28px; text-align: center;
-  background: rgba(74,122,80,0.1);
-  border-radius: 2px 6px 2px 5px;
-  padding: 1px 4px;
-}
-.ingredient-emoji { font-size: 18px; }
-
-.crafted-at-box {
-  margin: 14px 20px 0;
-  padding: 8px 12px;
-  background: rgba(74,122,80,0.08);
-  border-radius: 2px 8px 3px 7px / 5px 2px 6px 3px;
-  border: 1.5px solid var(--green-med);
-  font-family: 'Caveat', cursive; font-size: 15px;
-  display: flex; align-items: center; gap: 8px;
-}
-.crafted-at-box .label {
-  font-family: 'Patrick Hand', cursive;
-  font-size: 11px; color: var(--green-dark);
-  text-transform: uppercase; letter-spacing: 1px;
-}
-
-/* ── COMPARISON TABLE PREVIEW ── */
-.compare-section {
-  max-width: 960px; margin: 40px auto;
-  padding: 0 16px;
-}
-.section-heading {
-  font-family: 'Kalam', cursive;
-  font-size: 22px; font-weight: 700;
-  color: var(--brown-dark);
-  margin-bottom: 16px;
-  display: flex; align-items: center; gap: 10px;
-}
-.section-heading::after {
-  content: '';
-  flex: 1;
-  border-bottom: 2px dashed var(--brown-light);
-}
-
-.compare-table-wrap {
-  overflow-x: auto;
-}
-.compare-table {
-  width: 100%; border-collapse: separate; border-spacing: 0;
-  font-family: 'Caveat', cursive;
-}
-.compare-table th {
-  background: var(--brown-dark);
-  color: var(--cream);
-  padding: 10px 14px;
-  font-family: 'Kalam', cursive; font-size: 15px;
-  text-align: left;
-}
-.compare-table th:first-child { border-radius: 3px 0 0 0; }
-.compare-table th:last-child  { border-radius: 0 3px 0 0; }
-.compare-table td {
-  padding: 9px 14px;
-  border-bottom: 1px dashed var(--parchment);
-  font-size: 17px;
-  background: var(--paper);
-}
-.compare-table tr:hover td { background: #fff; }
-.compare-table .weapon-name {
-  font-family: 'Kalam', cursive; font-weight: 700;
-  font-size: 16px;
-}
-.bar-cell { min-width: 120px; }
-.bar-track {
-  height: 8px; background: var(--parchment);
-  border-radius: 4px;
-  overflow: hidden;
-  border: 1.5px solid var(--brown-light);
-}
-.bar-fill {
-  height: 100%; background: var(--green-med);
-  border-radius: 3px;
-  transition: width 0.3s;
-}
-.bar-fill.red { background: var(--red-accent); }
-
-/* ── PALETTE SHOWCASE ── */
-.palette-section {
-  max-width: 960px; margin: 40px auto;
-  padding: 0 16px 60px;
-}
-.palette-row {
-  display: flex; gap: 0; margin-bottom: 10px;
-  border-radius: 3px 10px 4px 9px / 7px 3px 8px 4px;
-  overflow: hidden;
-  box-shadow: 0 0 0 2px var(--brown-med), 3px 4px 0 var(--brown-light);
-}
-.swatch {
-  flex: 1; height: 56px;
-  display: flex; align-items: flex-end;
-  padding: 4px 8px;
-}
-.swatch span {
-  font-family: 'Patrick Hand', cursive;
-  font-size: 10px; opacity: 0.7;
-}
-
-/* ── HERO SECTION ── */
-.hero {
-  max-width: 960px; margin: 32px auto 0;
-  padding: 0 16px;
-  display: flex; align-items: center; gap: 24px;
-}
-.hero-text {}
-.hero-tagline {
-  font-family: 'Kalam', cursive;
-  font-size: 13px; color: var(--green-dark);
-  letter-spacing: 2px; text-transform: uppercase;
-  margin-bottom: 4px;
-}
-.hero-title {
-  font-family: 'Kalam', cursive;
-  font-size: 40px; font-weight: 700;
-  color: var(--brown-dark);
-  line-height: 1.05;
-  text-shadow: 3px 3px 0 rgba(90,60,30,0.15);
-}
-.hero-title em {
-  font-style: normal;
-  color: var(--green-dark);
-  -webkit-text-stroke: 1px var(--green-dark);
-}
-.hero-desc {
-  font-family: 'Caveat', cursive;
-  font-size: 17px; color: var(--brown-med);
-  margin-top: 8px;
-  max-width: 440px;
-  line-height: 1.5;
-}
-.hero-deco {
-  font-size: 72px; opacity: 0.55;
-  filter: drop-shadow(2px 2px 0 rgba(90,60,30,0.2));
   flex-shrink: 0;
 }
-.hero-stars {
-  font-size: 18px;
-  color: var(--brown-light);
-  letter-spacing: 4px;
-  margin-top: 10px;
-}
 
-/* ── COUNT BAR ── */
-.count-bar {
-  display: flex; align-items: center; gap: 12px;
+/* ── TIER CHIPS ── */
+.tier-wrap {
+  padding: 10px 16px 0;
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.tier-wrap::-webkit-scrollbar { display: none; }
+.tier-chip {
   font-family: 'Patrick Hand', cursive;
-  font-size: 12px; color: var(--brown-med);
+  font-size: 11px;
+  padding: 3px 11px;
+  border-radius: 20px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  border: 1.5px solid;
+  background: var(--paper);
+  cursor: pointer;
+}
+.tier-chip.active { background: rgba(45,90,61,0.12); }
+
+/* ── COUNT ── */
+.count-row {
+  padding: 14px 16px 10px;
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
 }
 .count-num {
   font-family: 'Kalam', cursive;
-  font-size: 28px; font-weight: 700;
+  font-size: 24px;
+  font-weight: 700;
   color: var(--green-dark);
+  line-height: 1;
 }
+.count-label {
+  font-family: 'Patrick Hand', cursive;
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--brown-light);
+}
+
+/* ── CARDS ── */
+.cards {
+  padding: 0 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.card {
+  background: var(--paper);
+  border: 2px solid var(--brown-med);
+  border-radius: 4px 12px 4px 12px;
+  box-shadow: 3px 4px 0 var(--brown-light);
+  padding: 12px 12px 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+  cursor: pointer;
+}
+.card::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 10px; bottom: 10px;
+  width: 3px;
+  border-radius: 0 2px 2px 0;
+}
+.c-weapon::before { background: var(--red); }
+.c-armor::before  { background: var(--green-med); }
+.c-tool::before   { background: var(--brown-med); }
+.c-potion::before { background: #0891b2; }
+.c-acc::before    { background: #7c3aed; }
+
+.card-img {
+  width: 58px; height: 58px;
+  flex-shrink: 0;
+  background: var(--cream);
+  border: 1.5px solid var(--brown-light);
+  border-radius: 3px 8px 3px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+}
+.card-body { flex: 1; min-width: 0; }
+.card-name {
+  font-family: 'Kalam', cursive;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.15;
+  margin-bottom: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.card-tags { display: flex; gap: 5px; flex-wrap: wrap; }
+.tag {
+  font-family: 'Patrick Hand', cursive;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 2px 6px 2px 6px;
+}
+.tag-weapon { background: rgba(139,58,58,0.1);   color: var(--red);        border: 1.5px solid var(--red); }
+.tag-armor  { background: rgba(74,122,80,0.1);   color: var(--green-dark); border: 1.5px solid var(--green-med); }
+.tag-tool   { background: rgba(90,60,30,0.1);    color: var(--brown-dark); border: 1.5px solid var(--brown-med); }
+.tag-potion { background: rgba(8,145,178,0.1);   color: #0e7490;           border: 1.5px solid #0891b2; }
+.tag-acc    { background: rgba(124,58,237,0.1);  color: #6d28d9;           border: 1.5px solid #7c3aed; }
+.tag-tier   { background: transparent; color: var(--brown-light); border: 1.5px dashed var(--brown-light); }
+.card-fav {
+  font-size: 18px;
+  color: var(--brown-light);
+  flex-shrink: 0;
+  padding: 4px;
+}
+.card-fav.active { color: #d97706; }
+
+/* ── DIVIDER ── */
+.divider {
+  margin: 20px 16px 0;
+  border: none;
+  border-top: 1.5px dashed var(--brown-light);
+  opacity: 0.5;
+}
+
+/* ── MODAL ── */
+.modal-hint {
+  padding: 16px 16px 10px;
+  font-family: 'Patrick Hand', cursive;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--brown-light);
+  text-align: center;
+}
+.modal {
+  margin: 0 16px;
+  background: var(--paper);
+  border: 2.5px solid var(--brown-dark);
+  border-radius: 4px 14px 4px 14px;
+  box-shadow: 4px 6px 0 var(--brown-med);
+  overflow: hidden;
+  position: relative;
+}
+.modal::after {
+  content: '';
+  position: absolute;
+  left: 48px; top: 0; bottom: 0;
+  width: 1.5px;
+  background: rgba(139,58,58,0.2);
+  pointer-events: none;
+}
+.modal-top {
+  padding: 16px 16px 14px 20px;
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  border-bottom: 1.5px dashed var(--brown-light);
+}
+.modal-img {
+  width: 70px; height: 70px;
+  flex-shrink: 0;
+  background: var(--cream);
+  border: 2px solid var(--brown-med);
+  border-radius: 3px 10px 3px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 34px;
+}
+.modal-name {
+  font-family: 'Kalam', cursive;
+  font-size: 21px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.1;
+  margin-bottom: 3px;
+}
+.modal-cat {
+  font-family: 'Patrick Hand', cursive;
+  font-size: 13px;
+  color: var(--brown-med);
+  margin-bottom: 6px;
+}
+.modal-tier {
+  display: inline-block;
+  font-family: 'Patrick Hand', cursive;
+  font-size: 11px;
+  background: var(--green-dark);
+  color: #fff;
+  padding: 3px 10px;
+  border-radius: 2px 6px 2px 6px;
+  letter-spacing: 0.5px;
+}
+.modal-block {
+  padding: 14px 16px 14px 20px;
+  border-bottom: 1.5px dashed rgba(196,149,106,0.4);
+}
+.modal-block:last-child { border-bottom: none; }
+.modal-block-title {
+  font-family: 'Kalam', cursive;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--brown-light);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.stat {
+  background: var(--cream);
+  border: 1.5px solid var(--brown-light);
+  border-radius: 2px 8px 2px 8px;
+  padding: 8px 12px;
+}
+.stat-label {
+  font-family: 'Patrick Hand', cursive;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--brown-med);
+  margin-bottom: 2px;
+}
+.stat-val {
+  font-family: 'Kalam', cursive;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1;
+}
+.stat-val.red   { color: var(--red); }
+.stat-val.green { color: var(--green-dark); }
+.stat-val.sm    { font-size: 17px; line-height: 1.3; }
+
+.ingr-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px dashed rgba(90,60,30,0.1);
+  font-family: 'Caveat', cursive;
+  font-size: 17px;
+  color: var(--ink);
+}
+.ingr-row:last-of-type { border-bottom: none; padding-bottom: 0; }
+.ingr-qty {
+  font-family: 'Kalam', cursive;
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--green-dark);
+  background: rgba(45,90,61,0.1);
+  border-radius: 3px 5px;
+  padding: 1px 5px;
+  min-width: 30px;
+  text-align: center;
+}
+.crafted-box {
+  margin-top: 12px;
+  background: rgba(45,90,61,0.07);
+  border: 1.5px solid var(--green-med);
+  border-radius: 3px 10px 3px 10px;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.crafted-label {
+  font-family: 'Patrick Hand', cursive;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--green-dark);
+  display: block;
+}
+.crafted-val {
+  font-family: 'Kalam', cursive;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink);
+}
+.crafted-emoji { font-size: 22px; margin-left: auto; }
+.spacer { height: 32px; }
 </style>
 </head>
 <body>
 
-<!-- SVG filters -->
-<svg class="filters">
-  <filter id="rough">
-    <feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="4" seed="5"/>
-    <feDisplacementMap in="SourceGraphic" scale="1.5"/>
-  </filter>
-</svg>
-
-<!-- ═══════════════════════════════════════════ -->
-<!-- SECTION 1 — HEADER                         -->
-<!-- ═══════════════════════════════════════════ -->
-<header class="header">
-  <div class="header-inner">
-    <div class="logo">
-      <span class="logo-sub">✦ guide de craft</span>
-      <span class="logo-main">Terraria <span>Craft</span></span>
-      <span class="logo-badge">497 objets</span>
-    </div>
-    <a class="nav-link" href="#">⚔ Comparateur</a>
-  </div>
-</header>
-
-<!-- ═══════════════════════════════════════════ -->
-<!-- SECTION 2 — HERO                           -->
-<!-- ═══════════════════════════════════════════ -->
-<div class="hero">
-  <div class="hero-text">
-    <div class="hero-tagline">✎ Ton carnet de recettes</div>
-    <div class="hero-title">Trouve &amp;<br><em>Craft</em> tout !</div>
-    <div class="hero-desc">Recherche parmi 497+ objets, consulte les recettes et compare tes armes.</div>
-    <div class="hero-stars">★ ★ ★ ★ ★</div>
-  </div>
-  <div class="hero-deco">🌿</div>
+<div class="page-title">
+  Style Manga Carnet de Craft
+  <span>mockup mobile — white / brown / green</span>
 </div>
 
-<!-- ═══════════════════════════════════════════ -->
-<!-- SECTION 3 — SEARCH + FILTERS               -->
-<!-- ═══════════════════════════════════════════ -->
-<div class="search-area" style="margin-top:32px;">
-  <div class="search-label">Rechercher un objet</div>
-  <div class="search-wrap">
-    <input class="search-input" type="text" placeholder="ex : Épée de mithril, Casque...">
-    <span class="search-icon">🔍</span>
+<div class="phone">
+  <div class="phone-notch"></div>
+  <div class="phone-screen">
+
+    <header class="header">
+      <div class="header-row">
+        <div>
+          <div class="logo-sub">✦ guide de craft</div>
+          <div class="logo-main">Terraria <em>Craft</em></div>
+        </div>
+        <div class="header-badge">497 objets</div>
+      </div>
+    </header>
+
+    <div class="section">
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <span class="search-placeholder">Rechercher un objet...</span>
+      </div>
+    </div>
+
+    <div class="tabs-wrap">
+      <div class="tabs-row">
+        <button class="tab active">Tous</button>
+        <button class="tab"><span class="tab-dot" style="background:var(--green-med)"></span>Armure</button>
+        <button class="tab"><span class="tab-dot" style="background:var(--red)"></span>Arme</button>
+        <button class="tab"><span class="tab-dot" style="background:var(--brown-med)"></span>Outil</button>
+        <button class="tab"><span class="tab-dot" style="background:#7c3aed"></span>Accessoire</button>
+        <button class="tab"><span class="tab-dot" style="background:#0891b2"></span>Potion</button>
+        <button class="tab"><span class="tab-dot" style="background:var(--brown-light)"></span>Ressource</button>
+      </div>
+    </div>
+
+    <div class="tier-wrap">
+      <button class="tier-chip" style="color:#6b7280;border-color:#9ca3af">Débutant</button>
+      <button class="tier-chip" style="color:#3b82f6;border-color:#3b82f6">Métaux</button>
+      <button class="tier-chip active" style="color:var(--green-dark);border-color:var(--green-dark)">Pré-HM</button>
+      <button class="tier-chip" style="color:var(--red);border-color:var(--red)">Hardmode</button>
+      <button class="tier-chip" style="color:#d97706;border-color:#d97706">Fin de jeu</button>
+      <button class="tier-chip" style="color:var(--brown-med);border-color:var(--brown-light)">Butin</button>
+    </div>
+
+    <div class="count-row">
+      <span class="count-num">497</span>
+      <span class="count-label">objets</span>
+    </div>
+
+    <div class="cards">
+
+      <div class="card c-weapon">
+        <div class="card-img">⚔️</div>
+        <div class="card-body">
+          <div class="card-name">Épée de Mithril</div>
+          <div class="card-tags">
+            <span class="tag tag-weapon">Arme</span>
+            <span class="tag tag-tier">Pré-Hardmode</span>
+          </div>
+        </div>
+        <div class="card-fav">☆</div>
+      </div>
+
+      <div class="card c-armor">
+        <div class="card-img">🛡️</div>
+        <div class="card-body">
+          <div class="card-name">Armure de Platine</div>
+          <div class="card-tags">
+            <span class="tag tag-armor">Armure</span>
+            <span class="tag tag-tier">Débutant</span>
+          </div>
+        </div>
+        <div class="card-fav active">★</div>
+      </div>
+
+      <div class="card c-tool">
+        <div class="card-img">⛏️</div>
+        <div class="card-body">
+          <div class="card-name">Pioche de Cobalt</div>
+          <div class="card-tags">
+            <span class="tag tag-tool">Outil</span>
+            <span class="tag tag-tier">Hardmode</span>
+          </div>
+        </div>
+        <div class="card-fav">☆</div>
+      </div>
+
+      <div class="card c-potion">
+        <div class="card-img">🧪</div>
+        <div class="card-body">
+          <div class="card-name">Potion de Rapidité</div>
+          <div class="card-tags">
+            <span class="tag tag-potion">Potion</span>
+            <span class="tag tag-tier">Butin</span>
+          </div>
+        </div>
+        <div class="card-fav">☆</div>
+      </div>
+
+      <div class="card c-acc">
+        <div class="card-img">💍</div>
+        <div class="card-body">
+          <div class="card-name">Anneau de Vitesse</div>
+          <div class="card-tags">
+            <span class="tag tag-acc">Accessoire</span>
+            <span class="tag tag-tier">Hardmode</span>
+          </div>
+        </div>
+        <div class="card-fav">☆</div>
+      </div>
+
+      <div class="card c-weapon">
+        <div class="card-img">🌟</div>
+        <div class="card-body">
+          <div class="card-name">Épée de Lumière</div>
+          <div class="card-tags">
+            <span class="tag tag-weapon">Arme</span>
+            <span class="tag tag-tier">Fin de jeu</span>
+          </div>
+        </div>
+        <div class="card-fav">☆</div>
+      </div>
+
+    </div>
+
+    <hr class="divider">
+    <div class="modal-hint">✎ fiche détail — au clic sur une carte</div>
+
+    <div class="modal">
+      <div class="modal-top">
+        <div class="modal-img">⚔️</div>
+        <div>
+          <div class="modal-name">Épée de Mithril</div>
+          <div class="modal-cat">Arme · Mêlée</div>
+          <span class="modal-tier">Pré-Hardmode</span>
+        </div>
+      </div>
+
+      <div class="modal-block">
+        <div class="modal-block-title">Statistiques</div>
+        <div class="stats-grid">
+          <div class="stat">
+            <div class="stat-label">Dégâts</div>
+            <div class="stat-val red">52</div>
+          </div>
+          <div class="stat">
+            <div class="stat-label">DPS estimé</div>
+            <div class="stat-val green">78</div>
+          </div>
+          <div class="stat">
+            <div class="stat-label">Vitesse</div>
+            <div class="stat-val sm">Rapide</div>
+          </div>
+          <div class="stat">
+            <div class="stat-label">Cadence</div>
+            <div class="stat-val">24</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-block">
+        <div class="modal-block-title">Ingrédients</div>
+        <div class="ingr-row">
+          <span class="ingr-qty">×10</span>
+          <span>Lingot de Mithril</span>
+        </div>
+        <div class="ingr-row">
+          <span class="ingr-qty">×1</span>
+          <span>Épée de bois</span>
+        </div>
+        <div class="crafted-box">
+          <div>
+            <span class="crafted-label">Fabriqué à</span>
+            <span class="crafted-val">Enclume de Mithril</span>
+          </div>
+          <span class="crafted-emoji">🔨</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="spacer"></div>
   </div>
-</div>
-
-<div class="tabs-section">
-  <div class="tabs-label">Catégories</div>
-  <div class="tabs-row">
-    <button class="tab active">Tous</button>
-    <button class="tab"><span class="tab-dot" style="background:var(--green-med)"></span>Armure</button>
-    <button class="tab"><span class="tab-dot" style="background:var(--red-accent)"></span>Arme</button>
-    <button class="tab"><span class="tab-dot" style="background:var(--brown-med)"></span>Outil</button>
-    <button class="tab"><span class="tab-dot" style="background:#8b5cf6"></span>Station</button>
-    <button class="tab"><span class="tab-dot" style="background:#c4956a"></span>Ressource</button>
-    <button class="tab"><span class="tab-dot" style="background:#e879f9"></span>Accessoire</button>
-    <button class="tab"><span class="tab-dot" style="background:#06b6d4"></span>Potion</button>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════════════ -->
-<!-- SECTION 4 — ITEM GRID                      -->
-<!-- ═══════════════════════════════════════════ -->
-<div class="grid-section">
-  <div class="grid-meta">
-    <span class="count-num">497</span> &nbsp;objets trouvés
-  </div>
-  <div class="items-grid">
-
-    <!-- Card 1 -->
-    <div class="item-card">
-      <span class="fav-btn">☆</span>
-      <div class="card-img-wrap"><span class="card-emoji">⚔️</span></div>
-      <div class="card-name">Épée de Mithril</div>
-      <div class="card-badges">
-        <span class="badge badge-weapon">Arme</span>
-        <span class="badge badge-tier">Pré-HM</span>
-      </div>
-    </div>
-
-    <!-- Card 2 -->
-    <div class="item-card">
-      <span class="fav-btn">★</span>
-      <div class="card-img-wrap"><span class="card-emoji">🛡️</span></div>
-      <div class="card-name">Armure de Platine</div>
-      <div class="card-badges">
-        <span class="badge badge-armor">Armure</span>
-        <span class="badge badge-tier">Débutant</span>
-      </div>
-    </div>
-
-    <!-- Card 3 -->
-    <div class="item-card">
-      <span class="fav-btn">☆</span>
-      <div class="card-img-wrap"><span class="card-emoji">⛏️</span></div>
-      <div class="card-name">Pioche de Cobalt</div>
-      <div class="card-badges">
-        <span class="badge badge-tool">Outil</span>
-        <span class="badge badge-tier">HM</span>
-      </div>
-    </div>
-
-    <!-- Card 4 -->
-    <div class="item-card">
-      <span class="fav-btn">☆</span>
-      <div class="card-img-wrap"><span class="card-emoji">🧪</span></div>
-      <div class="card-name">Potion de Rapidité</div>
-      <div class="card-badges">
-        <span class="badge" style="background:rgba(6,182,212,0.12);color:#0e7490;border:1.5px solid #06b6d4">Potion</span>
-        <span class="badge badge-tier">Butin</span>
-      </div>
-    </div>
-
-    <!-- Card 5 -->
-    <div class="item-card">
-      <span class="fav-btn">☆</span>
-      <div class="card-img-wrap"><span class="card-emoji">🌟</span></div>
-      <div class="card-name">Épée de Lumière</div>
-      <div class="card-badges">
-        <span class="badge badge-weapon">Arme</span>
-        <span class="badge badge-tier">Fin de jeu</span>
-      </div>
-    </div>
-
-    <!-- Card 6 -->
-    <div class="item-card">
-      <span class="fav-btn">☆</span>
-      <div class="card-img-wrap"><span class="card-emoji">💍</span></div>
-      <div class="card-name">Anneau de Vitesse</div>
-      <div class="card-badges">
-        <span class="badge" style="background:rgba(232,121,249,0.12);color:#a21caf;border:1.5px solid #e879f9">Accesso.</span>
-        <span class="badge badge-tier">HM</span>
-      </div>
-    </div>
-
-  </div><!-- /grid -->
-</div>
-
-<!-- ═══════════════════════════════════════════ -->
-<!-- SECTION 5 — MODAL DETAIL                   -->
-<!-- ═══════════════════════════════════════════ -->
-<div style="max-width:960px;margin:0 auto;padding:0 16px;">
-  <div class="section-heading">Exemple — Fiche détail</div>
-</div>
-<div class="modal-overlay" style="position:relative;margin:0 auto 0;max-width:960px;padding:0 16px 40px;display:flex;flex-direction:column;align-items:center;">
-  <div class="modal-label">cliquer sur une carte ouvre cette fiche</div>
-  <div class="modal" style="width:100%;max-width:420px;">
-    <div class="modal-close">✕</div>
-
-    <div class="modal-header">
-      <div class="modal-img-frame">⚔️</div>
-      <div class="modal-title-block">
-        <div class="modal-item-name">Épée de Mithril</div>
-        <div class="modal-item-cat">Arme • Mêlée</div>
-        <span class="modal-tier-badge">Pré-Hardmode</span>
-      </div>
-    </div>
-
-    <hr class="modal-divider">
-
-    <div class="modal-section-title">Statistiques</div>
-    <div class="stats-grid">
-      <div class="stat-box">
-        <div class="stat-label">Dégâts</div>
-        <div class="stat-value red">52</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-label">Vitesse</div>
-        <div class="stat-value">Rapide</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-label">DPS estimé</div>
-        <div class="stat-value green">78</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-label">Cadence</div>
-        <div class="stat-value">24</div>
-      </div>
-    </div>
-
-    <hr class="modal-divider">
-
-    <div class="modal-section-title">Ingrédients</div>
-    <div class="ingredients-list">
-      <div class="ingredient-row">
-        <span class="ingredient-qty">×10</span>
-        <span class="ingredient-emoji">🪨</span>
-        <span>Lingot de Mithril</span>
-      </div>
-      <div class="ingredient-row">
-        <span class="ingredient-qty">×1</span>
-        <span class="ingredient-emoji">🗡️</span>
-        <span>Épée de bois</span>
-      </div>
-    </div>
-
-    <div class="crafted-at-box">
-      <div>
-        <div class="label">Fabriqué à</div>
-        <strong>Enclume de Mithril</strong>
-      </div>
-      <span style="margin-left:auto;font-size:24px;">🔨</span>
-    </div>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════════════ -->
-<!-- SECTION 6 — COMPARATEUR                    -->
-<!-- ═══════════════════════════════════════════ -->
-<div class="compare-section">
-  <div class="section-heading">Comparateur d'armes</div>
-  <div class="compare-table-wrap">
-    <table class="compare-table">
-      <thead>
-        <tr>
-          <th>Arme</th>
-          <th>Dégâts</th>
-          <th>DPS</th>
-          <th>Vitesse</th>
-          <th>Tier</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="weapon-name">⚔️ Épée de Mithril</td>
-          <td>52</td>
-          <td>
-            <div class="bar-cell">
-              <div style="font-family:'Kalam',cursive;font-weight:700;margin-bottom:3px;">78</div>
-              <div class="bar-track"><div class="bar-fill" style="width:52%"></div></div>
-            </div>
-          </td>
-          <td>Rapide</td>
-          <td><span class="badge badge-tier">Pré-HM</span></td>
-        </tr>
-        <tr>
-          <td class="weapon-name">🗡️ Épée de Lumière</td>
-          <td>120</td>
-          <td>
-            <div class="bar-cell">
-              <div style="font-family:'Kalam',cursive;font-weight:700;margin-bottom:3px;">145</div>
-              <div class="bar-track"><div class="bar-fill" style="width:96%"></div></div>
-            </div>
-          </td>
-          <td>Rapide</td>
-          <td><span class="badge badge-tier">Fin de jeu</span></td>
-        </tr>
-        <tr>
-          <td class="weapon-name">🪓 Hache de Cobalt</td>
-          <td>38</td>
-          <td>
-            <div class="bar-cell">
-              <div style="font-family:'Kalam',cursive;font-weight:700;margin-bottom:3px;">42</div>
-              <div class="bar-track"><div class="bar-fill red" style="width:28%"></div></div>
-            </div>
-          </td>
-          <td>Lent</td>
-          <td><span class="badge badge-tier">HM</span></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════════════ -->
-<!-- SECTION 7 — PALETTE                        -->
-<!-- ═══════════════════════════════════════════ -->
-<div class="palette-section">
-  <div class="section-heading">Palette de couleurs</div>
-  <div class="palette-row">
-    <div class="swatch" style="background:#F5EDD8"><span style="color:#7B4F2E">#F5EDD8 cream</span></div>
-    <div class="swatch" style="background:#E8D9B8"><span style="color:#7B4F2E">#E8D9B8 parchment</span></div>
-    <div class="swatch" style="background:#C4956A"><span style="color:#fff">#C4956A brown-light</span></div>
-    <div class="swatch" style="background:#7B4F2E"><span style="color:#fff">#7B4F2E brown-med</span></div>
-    <div class="swatch" style="background:#3D2B1F"><span style="color:#fff">#3D2B1F brown-dark</span></div>
-  </div>
-  <div class="palette-row">
-    <div class="swatch" style="background:#8AB595"><span style="color:#2D4A2F">#8AB595 green-light</span></div>
-    <div class="swatch" style="background:#4A7A50"><span style="color:#fff">#4A7A50 green-med</span></div>
-    <div class="swatch" style="background:#2D4A2F"><span style="color:#fff">#2D4A2F green-dark</span></div>
-    <div class="swatch" style="background:#8B3A3A"><span style="color:#fff">#8B3A3A red-accent</span></div>
-    <div class="swatch" style="background:#FDFAF0"><span style="color:#7B4F2E">#FDFAF0 paper</span></div>
-  </div>
-  <p style="font-family:'Patrick Hand',cursive;font-size:12px;color:var(--brown-med);margin-top:12px;letter-spacing:1px;">
-    ↑ Police : Kalam (titres) + Caveat (texte) + Patrick Hand (labels)
-  </p>
 </div>
 
 </body>
