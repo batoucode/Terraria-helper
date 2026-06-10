@@ -149,6 +149,19 @@ export default function ItemDetailModal({ item, onClose }: ItemDetailModalProps)
             )}
 
             {/* Dashed divider */}
+            {/* Set Bonus */}
+            {item.stats?.setBonus && (
+              <div>
+                <h3 className="font-kalam font-bold text-lg text-brown-dk mb-2">🎯 Bonus de set</h3>
+                <div
+                  className="px-3 py-2 rounded-craft-sm border font-caveat text-sm text-center"
+                  style={{ background: 'rgba(217,119,6,0.1)', borderColor: '#d97706', color: '#92400e' }}
+                >
+                  &ldquo;{item.stats.setBonus}&rdquo;
+                </div>
+              </div>
+            )}
+
             {item.stats && item.ingredients && item.ingredients.length > 0 && (
               <div className="border-t-2 border-dashed border-brown-lt" />
             )}
@@ -163,7 +176,22 @@ export default function ItemDetailModal({ item, onClose }: ItemDetailModalProps)
                       key={idx}
                       className="flex justify-between items-center py-1.5 border-b border-dashed border-brown-lt last:border-b-0"
                     >
-                      <span className="font-caveat text-craft-ink">{ing.name}</span>
+                      <span
+                        className="font-caveat text-craft-ink hover:text-green-dk hover:underline cursor-pointer transition"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          // Try to find item by name and open it
+                          const allItems = typeof window !== 'undefined' ? (window as any).__ITEMS_DATA__ : null;
+                          if (allItems) {
+                            const found = allItems.find((i: any) => i.name === ing.name);
+                            if (found && typeof (window as any).__OPEN_ITEM__ === 'function') {
+                              (window as any).__OPEN_ITEM__(found.id);
+                            }
+                          }
+                        }}
+                      >
+                        {ing.name}
+                      </span>
                       <span
                         className="font-patrick text-[12px] px-2.5 py-0.5 rounded-full text-paper"
                         style={{ background: '#4A7A50' }}
