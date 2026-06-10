@@ -64,6 +64,13 @@ export default function Home() {
               >
                 ⚔ Comparer
               </Link>
+              <Link
+                href="/arbre"
+                className="font-caveat text-sm px-3 py-1.5 rounded-craft-sm border-2 border-green-dk text-green-dk hover:bg-green-dk hover:text-paper transition"
+                style={{ background: 'rgba(45,90,61,0.07)' }}
+              >
+                🌳 Arbre
+              </Link>
             </div>
           </div>
         </div>
