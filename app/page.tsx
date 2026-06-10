@@ -1,5 +1,5 @@
 'use client';
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo } from 'react';
 import { itemsData } from '@/lib/data';
 import { ItemCategory } from '@/lib/types';
 import SearchBar from '@/components/SearchBar';
@@ -14,16 +14,6 @@ export default function Home() {
   const [activeCategory, setActiveCategory] = useState<ItemCategory | null>(null);
   const [activeTier, setActiveTier] = useState<string | null>(null);
   const [selectedItemId, setSelectedItemId] = useState<string | null>(null);
-
-  // Expose data globally for ingredient click navigation
-  useEffect(() => {
-    (window as any).__ITEMS_DATA__ = itemsData;
-    (window as any).__OPEN_ITEM__ = (id: string) => setSelectedItemId(id);
-    return () => {
-      delete (window as any).__ITEMS_DATA__;
-      delete (window as any).__OPEN_ITEM__;
-    };
-  }, []);
 
   const TIER_TO_GROUP: Record<string, string> = {
     'Début': 'Débutant', 'Bois': 'Débutant', 'Cactus': 'Débutant', 'Minage': 'Débutant', 'Achat': 'Débutant',
@@ -120,6 +110,7 @@ export default function Home() {
         <ItemDetailModal
           item={selectedItem}
           onClose={() => setSelectedItemId(null)}
+          onIngredientClick={(id) => setSelectedItemId(id)}
         />
       )}
     </main>

@@ -1,11 +1,13 @@
 'use client';
 import Image from 'next/image';
 import { CraftingItem } from '@/lib/types';
+import { itemsData } from '@/lib/data';
 import { useFavorites } from '@/contexts/FavoritesContext';
 
 interface ItemDetailModalProps {
   item: CraftingItem;
   onClose: () => void;
+  onIngredientClick?: (itemId: string) => void;
 }
 
 const categoryBadge: Record<string, { bg: string; color: string; border: string }> = {
@@ -19,7 +21,7 @@ const categoryBadge: Record<string, { bg: string; color: string; border: string 
   Munition:          { bg: 'rgba(249,115,22,0.12)', color: '#9a3412', border: '#f97316' },
 };
 
-export default function ItemDetailModal({ item, onClose }: ItemDetailModalProps) {
+export default function ItemDetailModal({ item, onClose, onIngredientClick }: ItemDetailModalProps) {
   const { isFavorite, toggleFavorite } = useFavorites();
   const liked = isFavorite(item.id);
   const badge = categoryBadge[item.category];
@@ -180,13 +182,9 @@ export default function ItemDetailModal({ item, onClose }: ItemDetailModalProps)
                         className="font-caveat text-craft-ink hover:text-green-dk hover:underline cursor-pointer transition"
                         onClick={(e) => {
                           e.stopPropagation();
-                          // Try to find item by name and open it
-                          const allItems = typeof window !== 'undefined' ? (window as any).__ITEMS_DATA__ : null;
-                          if (allItems) {
-                            const found = allItems.find((i: any) => i.name === ing.name);
-                            if (found && typeof (window as any).__OPEN_ITEM__ === 'function') {
-                              (window as any).__OPEN_ITEM__(found.id);
-                            }
+                          if (onIngredientClick) {
+                            const found = itemsData.find((i) => i.name === ing.name);
+                            if (found) onIngredientClick(found.id);
                           }
                         }}
                       >
