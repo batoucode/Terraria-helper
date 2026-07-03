@@ -22,8 +22,8 @@ const patrickHand = Patrick_Hand({
 });
 
 export const metadata: Metadata = {
-  title: 'Terraria Craft Helper',
-  description: 'Assistant de craft pour Terraria — objets, recettes, favoris',
+  title: 'Terraria Helper — Craft, PNJ, Outils',
+  description: 'Assistant Terraria — objets, recettes, planification PNJ, bonheur et pylônes',
 };
 
 export default function RootLayout({

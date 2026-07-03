@@ -1,27 +1,58 @@
-# Terraria Craft Helper
+# Terraria Helper 🗺️⚒️
 
-Application web mobile-first pour consulter les recettes de craft, les statistiques et les paliers des objets de Terraria.
+Application web Next.js pour Terraria — outils de craft ET planification des villages PNJ.
 
 ## Fonctionnalités
 
-- Recherche en temps réel
-- Filtrage par catégorie (Armure, Arme, Outil, Station de craft)
-- Fiche détaillée avec statistiques, ingrédients et station requise
+### ⚒️ Craft Helper
+- Recherche en temps réel d'objets
+- Filtrage par catégorie (Armure, Arme, Outil, Station)
+- Fiche détaillée avec statistiques, ingrédients et station
+- Arbre de craft récursif
+- Comparateur d'armes
 - Sauvegarde locale des favoris (⭐)
-- Interface adaptée aux smartphones
-- Design sombre thème Terraria
+
+### 🗺️ Planificateur PNJ
+- **Villages recommandés** par biome (8 groupes)
+- **Grille complète des PNJ** avec filtres (phase, biome, recherche)
+- **Checklist interactive** avec barre de progression (sauvegardée)
+- **Conseils de construction** (25 blocs, 120 blocs, duos)
+- **Ordre conseillé de placement** étape par étape
+- Fiche détaillée pour chaque PNJ
+- Mode clair/sombre
+- Sauvegarde localStorage de la checklist
 
 ## Déploiement sur Vercel
 
-1. Clonez ce dépôt
-2. Exécutez `npm install` ou `yarn`
-3. Lancez le développement avec `npm run dev`
-4. Pour déployer sur Vercel, connectez votre dépôt GitHub à Vercel
+```bash
+npm install
+npm run dev      # dev local
+npm run build    # prod
+```
+
+Connecte le dépôt GitLab à Vercel pour le déploiement automatique.
+
+## Structure
+
+```
+app/
+  page.tsx          # Accueil Craft
+  layout.tsx        # Layout global
+  pnj/page.tsx      # Planificateur PNJ
+  comparateur/      # Comparateur d'armes
+  arbre/            # Arbre de craft
+lib/
+  data.ts           # Données objets craft
+  npcData.ts        # Données PNJ, villages, checklists
+  types.ts          # Types TypeScript
+components/         # Composants réutilisables
+```
 
 ## Ajout de données
 
-Les objets sont stockés dans `lib/data.ts`. Vous pouvez y ajouter de nouveaux objets suivant l'interface `CraftingItem`.
+- Objets craft → `lib/data.ts` (interface `CraftingItem`)
+- PNJ / villages → `lib/npcData.ts` (interfaces `NpcData`, `VillageGroup`)
 
 ## Licence
 
-Code sous MIT. Les données et images proviennent du [Terraria Wiki](https://terraria.wiki.gg/fr/) (CC BY-NC-SA).
+Code sous MIT. Données du [Terraria Wiki](https://terraria.wiki.gg/fr/) (CC BY-NC-SA).

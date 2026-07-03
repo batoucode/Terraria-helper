@@ -58,6 +58,13 @@ export default function Home() {
                 {itemsData.length} objets
               </span>
               <Link
+                href="/pnj"
+                className="font-caveat text-sm px-3 py-1.5 rounded-craft-sm border-2 border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-paper transition"
+                style={{ background: 'rgba(147,51,234,0.07)' }}
+              >
+                🗺️ PNJ
+              </Link>
+              <Link
                 href="/comparateur"
                 className="font-caveat text-sm px-3 py-1.5 rounded-craft-sm border-2 border-craft-red text-craft-red hover:bg-craft-red hover:text-paper transition"
                 style={{ background: 'rgba(139,58,58,0.07)' }}
